@@ -1,0 +1,31 @@
+{
+  "devDependencies": {
+    "@alrra/travis-scripts": "^3.0.1",
+    "babelify": "^8.0.0",
+    "babel-core":"6.26.0",
+    "browser-sync": "^2.18.13",
+    "browserify": "^14.5.0",
+    "es6-promise": "^4.1.1",
+    "gulp": "^3.9.1",
+    "gulp-clean": "^0.3.2",
+    "gulp-htmlmin": "^3.0.0",
+    "gulp-less" : "^3.3.2",
+    "gulp-load-plugins": "^1.5.0",
+    "gulp-size": "^2.1.0",
+    "gulp-sourcemaps": "^2.6.1",
+    "gulp-util": "^3.0.8",
+    "lodash": "^4.17.4",
+    "merge-stream": "^1.0.1",
+    "run-sequence": "^2.2.0",
+    "uglifyify": "^4.0.5",
+    "vinyl-buffer": "^1.0.0",
+    "vinyl-source-stream": "^1.1.0",
+    "watchify": "^3.9.0"
+  },
+  "private": true,
+  "scripts": {
+    "build": "gulp build --production",
+    "serve": "gulp serve",
+    "test": "gulp build --production"
+  }
+}

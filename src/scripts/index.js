@@ -75,10 +75,8 @@ var init = function(){
             event.preventDefault();
             // move dragged elem to the selected drop target
             if ( $(event.target) ) {
-                debugger;
                 event.target.style.fill = "green";
-
-              $(event.target).addClass(currentClass);
+                $(event.target).addClass(currentClass);
 
             //    dragged.parentNode.removeChild( dragged );
             //    event.target.appendChild( dragged );
@@ -88,26 +86,36 @@ var init = function(){
     
     //initalize hover function
     var hoverInit = function(){
-            $(this).addClass("enabled");
-            $description = $(".description");
-            $('svg > *:not(text,g), g > *:not(text)').hover(function() {
+        var mappedClass;
+        var $hoveredElement;
+        $description = $(".description");
+        $('svg > *:not(text,g), g > *:not(text)').hover(
+            function() {
             //document.getElementById("demo").innerHTML = this.getAttribute("class").split(' ')[0];
-            
-                $(this).addClass("enabled heyo");
-                $description.addClass('active');
-
-            }, function() {
+                $hoveredElement = $(this);
+                // var ClassList = $hoveredElement.className.split(/\s+/);
+                mappedClass = $hoveredElement.attr('class');
+                if( mappedClass ){
+                    $description.html(mappedClass);            
+                    $description.addClass('active');    
+                }
+                $hoveredElement.addClass("enabled heyo");
+            },
+            function() {
+                $hoveredElement.removeClass("enabled heyo");
                 $description.removeClass('active');
-            });
-    
-            $(document).on('mousemove', function(e){
-    
-            $description.css({
-            left:  e.pageX,
-            top:   e.pageY - 70
-            });
-    
-            });
+                $description.html("UnmappedClass");
+            }
+        );
+
+        $(document).on('mousemove', function(e){
+
+        $description.css({
+        left:  e.pageX,
+        top:   e.pageY - 70
+        });
+
+        });
     };
 
 //Start the script after the page is loaded

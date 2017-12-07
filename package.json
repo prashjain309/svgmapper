@@ -1,8 +1,6 @@
 {
   "devDependencies": {
     "@alrra/travis-scripts": "^3.0.1",
-    "babelify": "^8.0.0",
-    "babel-core": "6.26.0",
     "browser-sync": "^2.18.13",
     "browserify": "^14.5.0",
     "es6-promise": "^4.1.1",

@@ -1,1 +1,21 @@
-"HELLO WORLD" 
+<!DOCTYPE html>
+<html>
+    <head>
+        <script>
+            var seconds_left = 5;
+            var interval = setInterval(function() {
+                document.getElementById('timer_span').innerHTML = --seconds_left;
+            
+                if (seconds_left <= 0)
+                {
+                    document.getElementById('timer_span').innerHTML = 'You are ready';
+                    clearInterval(interval);
+                    location.href = "./build/index.html";
+                }
+            }, 1000);
+        </script>
+    </head>
+    <body>
+        <p class = "timer-wrapper">You will be redirected to the SVG mapper in <span id="timer_span">5</span> sec</p>
+    </body>
+</html>

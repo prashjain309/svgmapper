@@ -5,6 +5,7 @@ var gulp = require('gulp');
 var less = require('gulp-less');
 var clean = require('gulp-clean');
 var plugins = require('gulp-load-plugins')();
+var path = require('path');
 var runSequence = require('run-sequence');
 
 var reload = browserSync.reload;
@@ -22,10 +23,19 @@ gulp.task('clean', function (done) {
 
 //Covert all less file to css 
 gulp.task('less', function () {
-  return gulp.src('./src/style/*.less')
+  return gulp.src('./src/styles/*.less')
   .pipe(less())
-  .pipe(gulp.dest('./build/style/'));
+  .pipe(gulp.dest('./build/styles/'));
 });
+
+// gulp.task('less', function () {
+//   return gulp.src('./src/styles/*.less')
+//     .pipe(less({
+//       paths: [ path.join(__dirname, 'less', 'includes') ]
+//     }))
+//     .pipe(gulp.dest('./build/styles/*.css'));
+// });
+
 
 //Minify all html files 
 gulp.task('html', ['less'], function () {
@@ -54,7 +64,7 @@ gulp.task('copy', function () {
     // Exclude the following files
     // (other tasks will handle the copying of these files)
     '!src/*.html',
-    '!src/{css,css/**}',
+    '!src/{styles,styles/**}',
     '!src/{js,scripts/**}'
   ]).pipe(gulp.dest('build'));
 });
@@ -69,7 +79,7 @@ gulp.task('js', function () {
 gulp.task('browser-sync', function() {
   browserSync.init({
     notify: true,
-    port: 8080,
+    port: 8081,
     baseDir: "build",
     server: "build",
     open: false

@@ -25,6 +25,7 @@
     "gh-pages-deploy": {
     "staticpath": "build",
     "prep": [
+      "clean-old",
       "build"
     ],
     "post": [
@@ -38,6 +39,7 @@
     "serve": "gulp serve",
     "test": "gulp build --production",
     "deploy": "gh-pages-deploy",
-    "clean-source": "rimraf README.md src package.json gulpfile.js"
+    "clean-source": "rimraf README.md src",
+    "clean-old":"rimraf styles svgs scripts build index.html"
   }
 }

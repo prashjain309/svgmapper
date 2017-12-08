@@ -23,7 +23,6 @@
   },
     "gh-pages-deploy": {
     "staticpath": "build",
-    "cname": "prashjain309.github.io",
     "prep": [
       "build"
     ],

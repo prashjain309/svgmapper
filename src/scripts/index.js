@@ -4,18 +4,26 @@ var init = function(){
         //logic for svg file upload and display it as a svg only
         $('#svg-uploader').change(function(){
             var input=this;
-            if (input.files && input.files[0]) {
+            var fileName = input.files[0].name;
+            if (input.files && input.files[0].type == "image/svg+xml") {
                 var reader = new FileReader();
                 reader.onload = function (e) {
+                    $('.btn').addClass("re-upload").html("<pre>You are Mapping <b>"+ fileName +"<b>\nClick Here to Re-Upload the SVG</pre>");
                     svgFileContent = e.target.result;
-                    $('.upload')
-                        .append(svgFileContent)
-                        .width("100%")
-                        .height("100%");
-                        dragDropInit();
-                        hoverInit();
+                    
+                    //remove Old SVG if uploaded
+                    $(".upload > svg").remove();
+
+                    //Attach the new Svg to the Dom                    
+                    $('.upload').append(svgFileContent);
+                    
+                    dragDropInit();
+                    hoverInit();
                 };
                 reader.readAsText(input.files[0],"UTF-8");
+            }
+            else{
+                alert("Please upload a Svg File Only!!");
             }
         });
     
@@ -35,7 +43,7 @@ var init = function(){
     
     //Initialize drag and drop function after the SVG is loaded. 
     var dragDropInit = function(){
-      var dragged,currentClass;
+        var dragged,currentClass;
       
         /* events fired on the draggable target */
         document.addEventListener("drag", function( event ) {
@@ -46,7 +54,7 @@ var init = function(){
             // store a ref. on the dragged elem
             dragged = event.target;
             // make it half transparent
-            event.target.style.opacity = .5;
+            event.target.style.opacity = 0.5;
             currentClass = event.target.innerHTML;
         }, false);
       
@@ -67,14 +75,13 @@ var init = function(){
             if ( event.target.className ) {
                 event.target.style.background = "red";
             }
-      
         }, false);
       
         document.addEventListener("drop", function( event ) {
             // prevent default action (open as link for some elements)
             event.preventDefault();
             // move dragged elem to the selected drop target
-            if ( $(event.target).hasClass('mapped') ) {
+            if ($(event.target).attr('class')) {
                 if(confirm("Do you want to remap this block?")){
                     $(event.target).removeClass();
                 }
@@ -112,12 +119,10 @@ var init = function(){
         );
 
         $(document).on('mousemove', function(e){
-
-        $description.css({
-        left:  e.pageX,
-        top:   e.pageY - 70
-        });
-
+            $description.css({
+                left:  e.pageX,
+                top:   e.pageY - 70
+            });
         });
     };
 

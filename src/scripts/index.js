@@ -74,13 +74,16 @@ var init = function(){
             // prevent default action (open as link for some elements)
             event.preventDefault();
             // move dragged elem to the selected drop target
-            if ( $(event.target) ) {
-                event.target.style.fill = "green";
-                $(event.target).addClass(currentClass);
-
-            //    dragged.parentNode.removeChild( dragged );
-            //    event.target.appendChild( dragged );
+            if ( $(event.target).hasClass('mapped') ) {
+                if(confirm("Do you want to remap this block?")){
+                    $(event.target).removeClass();
+                }
+                else{
+                    return;
+                }
             }
+            $(event.target).addClass("mapped");
+            $(event.target).addClass(currentClass);
         }, false);
     };
     

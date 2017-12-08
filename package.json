@@ -4,6 +4,7 @@
     "browser-sync": "^2.18.13",
     "browserify": "^14.5.0",
     "es6-promise": "^4.1.1",
+    "gh-pages-deploy": "0.4.2",
     "gulp": "^3.9.1",
     "gulp-clean": "^0.3.2",
     "gulp-htmlmin": "^3.0.0",
@@ -20,10 +21,23 @@
     "vinyl-source-stream": "^1.1.0",
     "watchify": "^3.9.0"
   },
+    "gh-pages-deploy": {
+    "staticpath": "build",
+    "cname": "prashjain309.github.io",
+    "prep": [
+      "build"
+    ],
+    "post": [
+      "clean-source"
+    ],
+    "noprompt": false
+  },
   "private": true,
   "scripts": {
     "build": "gulp build --production",
     "serve": "gulp serve",
-    "test": "gulp build --production"
+    "test": "gulp build --production",
+    "deploy": "gh-pages-deploy",
+    "clean-source": "rimraf README.md src package.json index.html gulpfile.js"
   }
 }

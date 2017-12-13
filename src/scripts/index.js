@@ -99,7 +99,7 @@ var init = function(){
         var mappedClass;
         var $hoveredElement;
         $description = $(".description");
-        $('svg > *:not(text,g), g > *:not(text)').hover(
+        $('svg > *:not(text,g), g > *:not(text)').not('g').not('text').hover(
             function() {
             //document.getElementById("demo").innerHTML = this.getAttribute("class").split(' ')[0];
                 $hoveredElement = $(this);

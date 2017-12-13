@@ -19,6 +19,7 @@ var init = function(){
                     
                     dragDropInit();
                     hoverInit();
+                    downloadInit();
                 };
                 reader.readAsText(input.files[0],"UTF-8");
             }
@@ -82,7 +83,7 @@ var init = function(){
             event.preventDefault();
             // move dragged elem to the selected drop target
             if ($(event.target).attr('class')) {
-                if(confirm("Do you want to remap this block?")){
+                if(confirm("This Block is mapped as "+ $(event.target).attr('class') +". Do you want to remap this block?")){
                     $(event.target).removeClass();
                 }
                 else{
@@ -126,6 +127,31 @@ var init = function(){
         });
     };
 
+    //Attach Download Button to DOM
+    var downloadInit = function(){
+        $('#download').show().click(function(){
+            var svg, convertedSvg;
+            svg = getFinalSVG();
+            convertedSvg = convertSVG(svg);
+            saveSVG(convertedSvg);
+        });
+    };
+
+    getFinalSVG = function(){
+        // Get the svg that has to be downloaded
+        return $(".upload > svg");
+    };
+
+    convertSVG = function(svg){
+        // Remove all classes which are not requried
+        $('*',svg).removeClass("enabled heyo mapped");
+        return $(".upload > svg");
+    };
+
+    saveSVG = function(svg){
+        //output the final svg
+        console.log(svg[0]);
+    };
 //Start the script after the page is loaded
 $(document).ready(function() {
     init();

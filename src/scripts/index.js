@@ -1,6 +1,7 @@
 var init = function(){
     //logic for svg file upload and display it as a svg only
-        var svgFileContent;
+        var svgFileContent,
+        reuploadState = false;
         //logic for svg file upload and display it as a svg only
         $('#svg-uploader').change(function(){
             var input=this;
@@ -16,10 +17,15 @@ var init = function(){
 
                     //Attach the new Svg to the Dom                    
                     $('.upload').append(svgFileContent);
-                    
-                    dragDropInit();
+                    if(!reuploadState){
+                        //Initialize Drag Drop and download functionality for the first time
+                        dragDropInit();
+                        downloadInit();
+                    }
+
+                    //Initialize hover every time the new svg is uploaded
                     hoverInit();
-                    downloadInit();
+                    reuploadState = true;
                 };
                 reader.readAsText(input.files[0],"UTF-8");
             }
@@ -130,26 +136,46 @@ var init = function(){
     //Attach Download Button to DOM
     var downloadInit = function(){
         $('#download').show().click(function(){
-            var svg, convertedSvg;
-            svg = getFinalSVG();
-            convertedSvg = convertSVG(svg);
-            saveSVG(convertedSvg);
+            var svg;
+            svg = $(".upload > svg");
+            convertSVG(svg);
+            saveSVG();
         });
-    };
-
-    getFinalSVG = function(){
-        // Get the svg that has to be downloaded
-        return $(".upload > svg");
     };
 
     convertSVG = function(svg){
         // Remove all classes which are not requried
         $('*',svg).removeClass("enabled heyo mapped");
-        return $(".upload > svg");
     };
 
-    saveSVG = function(svg){
+    saveSVG = function(){
         //output the final svg
+        var svg = $(".upload > svg")
+
+        //get svg source.
+        var serializer = new XMLSerializer();
+        var source = serializer.serializeToString(svg[0]);
+
+        //add name spaces.
+        if(!source.match(/^<svg[^>]+xmlns="http\:\/\/www\.w3\.org\/2000\/svg"/)){
+            source = source.replace(/^<svg/, '<svg xmlns="http://www.w3.org/2000/svg"');
+        }
+        if(!source.match(/^<svg[^>]+"http\:\/\/www\.w3\.org\/1999\/xlink"/)){
+            source = source.replace(/^<svg/, '<svg xmlns:xlink="http://www.w3.org/1999/xlink"');
+        }
+
+        //add xml declaration
+        source = '<?xml version="1.0" standalone="no"?>\r\n' + source;
+
+        //convert svg source to URI data scheme.
+        var url = "data:image/svg+xml;charset=utf-8,"+encodeURIComponent(source);
+
+        //set url value to a element's href attribute and make it downloadable.
+        document.getElementById("downloadlink").href = url;
+        document.getElementById("downloadlink").download = svg[0];
+
+        //you can download svg file by right click menu.
+        $('#downloadlink').get(0).click();
         console.log(svg[0]);
     };
 //Start the script after the page is loaded

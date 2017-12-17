@@ -25,6 +25,7 @@ var init = function(){
 
                     //Initialize hover every time the new svg is uploaded
                     hoverInit();
+                    zoomInit($(".upload > svg"));
                     reuploadState = true;
                 };
                 reader.readAsText(input.files[0],"UTF-8");
@@ -133,6 +134,36 @@ var init = function(){
         });
     };
 
+    var zoomInit = function(zoomTarget){
+        
+
+        var zoomLevel = 0;
+        
+        $("#ZoomInSVG").on('click',function (event) {
+            zoomTarget.width(
+                zoomTarget.width() * 1.2
+            );
+            $(zoomTarget).height(
+                $(zoomTarget).height() * 1.2
+            );
+
+            zoomLevel++;            
+        });
+        
+        $("#ZoomOutSVG").on('click',function (event) {
+        if(zoomLevel > 0){
+            $(".upload > svg").width(
+                $(".upload > svg").width() * 0.8
+            );
+            $(".upload > svg").height(
+                $(".upload > svg").height() * 0.8
+            );
+            zoomLevel--;
+        }
+    });
+
+
+    };
     //Attach Download Button to DOM
     var downloadInit = function(){
         $('#download').show().click(function(){

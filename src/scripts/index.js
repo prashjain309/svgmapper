@@ -1,12 +1,14 @@
 var init = function(){
     //logic for svg file upload and display it as a svg only
         var svgFileContent,
+        svgFileName;
         reuploadState = false;
         //logic for svg file upload and display it as a svg only
         $('#svg-uploader').change(function(){
             var input=this;
             var fileName = input.files[0].name;
             if (input.files && input.files[0].type == "image/svg+xml") {
+                svgFileName = fileName;
                 var reader = new FileReader();
                 reader.onload = function (e) {
                     $('.btn').addClass("re-upload").html("<pre>You are Mapping <b>"+ fileName +"<b>\nClick Here to Re-Upload the SVG</pre>");
@@ -20,7 +22,7 @@ var init = function(){
                     if(!reuploadState){
                         //Initialize Drag Drop and download functionality for the first time
                         dragDropInit();
-                        downloadInit();
+                        downloadInit(svgFileName);
                     }
 
                     //Initialize hover every time the new svg is uploaded
@@ -134,12 +136,12 @@ var init = function(){
     };
 
     //Attach Download Button to DOM
-    var downloadInit = function(){
+    var downloadInit = function( svgFileName){
         $('#download').show().click(function(){
             var svg;
             svg = $(".upload > svg");
             convertSVG(svg);
-            saveSVG();
+            saveSVG(svgFileName);
         });
     };
 
@@ -148,7 +150,7 @@ var init = function(){
         $('*',svg).removeClass("enabled heyo mapped");
     };
 
-    saveSVG = function(){
+    saveSVG = function(svgFileName){
         //output the final svg
         var svg = $(".upload > svg")
 
@@ -172,7 +174,7 @@ var init = function(){
 
         //set url value to a element's href attribute and make it downloadable.
         document.getElementById("downloadlink").href = url;
-        document.getElementById("downloadlink").download = svg[0];
+        document.getElementById("downloadlink").download = svgFileName;
 
         //you can download svg file by right click menu.
         $('#downloadlink').get(0).click();

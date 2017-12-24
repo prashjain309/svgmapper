@@ -13,20 +13,21 @@ var init = function(){
                 reader.onload = function (e) {
                     $('.btn').addClass("re-upload").html("<pre>You are Mapping <b>"+ fileName +"<b>\nClick Here to Re-Upload the SVG</pre>");
                     svgFileContent = e.target.result;
-                    
+                    svgFileContent.id = "target-svg";
                     //remove Old SVG if uploaded
-                    $(".upload > svg").remove();
+                    $(".svg-container > svg").remove();
 
                     //Attach the new Svg to the Dom                    
-                    $('.upload').append(svgFileContent);
+                    $('.svg-container').append(svgFileContent);
                     if(!reuploadState){
                         //Initialize Drag Drop and download functionality for the first time
                         dragDropInit();
                         downloadInit(svgFileName);
                     }
-
+                    
                     //Initialize hover every time the new svg is uploaded
                     hoverInit();
+                    zoomInit($(".svg-container > svg"));
                     reuploadState = true;
                 };
                 reader.readAsText(input.files[0],"UTF-8");
@@ -47,7 +48,7 @@ var init = function(){
             $('#render').html(x);
         });
     
-    }
+    };
     
     
     //Initialize drag and drop function after the SVG is loaded. 
@@ -135,11 +136,43 @@ var init = function(){
         });
     };
 
+    var zoomInit = function(zoomTarget){
+        
+        var $zoomIn = $("#ZoomInSVG");
+        var $zoomOut = $("#ZoomOutSVG");
+        var zoomLevel = 0;
+        zoomTarget.parent().parent().css('position','relative');
+        zoomTarget.parent().css('max-height',zoomTarget.height());
+        $zoomIn.css('display','block').on('click',function (event) {
+            zoomTarget.parent().css('overflow','scroll');
+            
+            zoomTarget.width(
+                zoomTarget.width() * 1.2
+            );
+            zoomTarget.height(
+                zoomTarget.height() * 1.2   
+            );
+
+            zoomLevel++;            
+        });
+        
+        $zoomOut.css('display','block').on('click',function (event) {
+            if(zoomLevel > 0){
+                zoomTarget.width(
+                    zoomTarget.width() * 0.8
+                );
+                zoomTarget.height(
+                    zoomTarget.height() * 0.8
+                );
+                zoomLevel--;
+            }
+        });
+    };
     //Attach Download Button to DOM
     var downloadInit = function( svgFileName){
         $('#download').show().click(function(){
             var svg;
-            svg = $(".upload > svg");
+            svg = $(".svg-container > svg");
             convertSVG(svg);
             saveSVG(svgFileName);
         });
@@ -152,7 +185,7 @@ var init = function(){
 
     saveSVG = function(svgFileName){
         //output the final svg
-        var svg = $(".upload > svg")
+        var svg = $(".svg-container > svg");
 
         //get svg source.
         var serializer = new XMLSerializer();

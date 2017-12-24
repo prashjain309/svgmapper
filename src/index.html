@@ -12,13 +12,18 @@
           </div>
           <br/>
           <div class="svg-wrapper">
-              <div class="upload">
-                    <label for="svg-uploader" class="btn">Upload SVG</label>
-                    <input id="svg-uploader" style="visibility:hidden;" type="file">
-              </div>
-              <div class="excel">
-                  <textarea name="inney" id="inney" cols="30" rows="10" placeholder="Please enter the categories to be mapped in the following format: CategoryName(CategoryCode). EX: CAT1(1000000001)"></textarea><br/>
-              <button id='convert'>Convert</button><br/><br/>
+                <div class="upload">
+                        <label for="svg-uploader" class="btn">Upload SVG</label>
+                        <input id="svg-uploader" style="visibility:hidden;" type="file">
+                        <div class='svg-container'></div>
+                        <div class='zoom-buttons'>
+                            <button class="zoom-btn" id="ZoomInSVG">+</button>
+                            <button class="zoom-btn" id="ZoomOutSVG">-</button>
+                        </div>
+                    </div>
+                <div class="excel">
+                <textarea name="inney" id="inney" cols="30" rows="10" placeholder="Please enter the categories to be mapped in the following format: CategoryName(CategoryCode). EX: CAT1(1000000001)"></textarea><br/>
+            <button id='convert'>Convert</button><br/><br/>
                   Sample Output:
                   <div id="render"></div>
               </div>

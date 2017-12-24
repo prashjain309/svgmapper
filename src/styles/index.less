@@ -4,7 +4,7 @@ html{ text-rendering: optimizeLegibility;}
               margin: 10px !important;
             }
 .heading{
-  width:100%;
+  // width:100%;
   border:1px solid gray;
   text-align:center;
   padding:8px;
@@ -49,7 +49,7 @@ html{ text-rendering: optimizeLegibility;}
 }
 .excel{
    width:50%;
-  height:450px;
+  height:550px;
   
 }
 textarea {
@@ -162,4 +162,23 @@ text{
   position: fixed;
   bottom: 20px;
   right: 20px;
+}
+
+.zoom-buttons{
+  position: absolute;
+  right: 20px;
+  bottom:40px;
+  .zoom-btn{
+    min-width: 28px;
+    min-height: 28px;
+    margin: 2px;
+    text-align: center;
+    border-radius: 6px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    color: #000;
+    box-shadow: 0 0.5px 0 1px rgba(5, 5, 5, 0.1);
+    font-size: 20px;
+    display:none;
+  }  
 }

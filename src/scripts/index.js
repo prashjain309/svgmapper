@@ -138,34 +138,13 @@ var init = function(){
 
     var zoomInit = function(zoomTarget){
         
-        var $zoomIn = $("#ZoomInSVG");
-        var $zoomOut = $("#ZoomOutSVG");
         var zoomLevel = 0;
         zoomTarget.parent().parent().css('position','relative');
         zoomTarget.parent().css('max-height',zoomTarget.height());
-        $zoomIn.css('display','block').on('click',function (event) {
-            zoomTarget.parent().css('overflow','scroll');
-            
-            zoomTarget.width(
-                zoomTarget.width() * 1.2
-            );
-            zoomTarget.height(
-                zoomTarget.height() * 1.2   
-            );
-
-            zoomLevel++;            
-        });
-        
-        $zoomOut.css('display','block').on('click',function (event) {
-            if(zoomLevel > 0){
-                zoomTarget.width(
-                    zoomTarget.width() * 0.8
-                );
-                zoomTarget.height(
-                    zoomTarget.height() * 0.8
-                );
-                zoomLevel--;
-            }
+        $(zoomTarget).parent().panzoom({
+            $zoomIn: $("#ZoomInSVG").show(),
+            $zoomOut:$("#ZoomOutSVG").show(),
+            $reset:$("#ZoomResetSVG").show()
         });
     };
     //Attach Download Button to DOM

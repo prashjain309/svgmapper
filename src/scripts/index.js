@@ -1,3 +1,9 @@
+var dom = {};
+
+var initDom = function(){
+    dom.prefixWrapper = $('.prefix'),
+    dom.prefixInput = $("input[name='prefix']",dom.prefixWrapper)
+};
 var init = function(){
     //logic for svg file upload and display it as a svg only
         var svgFileContent,
@@ -41,7 +47,7 @@ var init = function(){
         //Logic for excel file upload and conversion
         $('#convert').click(function(){
             x = $('#inney').val();
-            x = x.split("\(").join('</td><td draggable="true">');
+            x = x.split("\(").join('</td><td draggable="true">'+ dom.prefixInput.val());
             x = x.split('\)').join('</td>\n\t</tr>\n\t<tr>\n\t\t<td>');
             x = '<table>\n\t<tr>\n\t\t<td>' + x + '</td>\n\t</tr>\n</table>\n';
             $('#output').text(x).focus().select();
@@ -194,5 +200,6 @@ var init = function(){
     };
 //Start the script after the page is loaded
 $(document).ready(function() {
+    initDom();
     init();
 });

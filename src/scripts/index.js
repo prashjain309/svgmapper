@@ -170,11 +170,13 @@ var init = function(){
 
     saveSVG = function(svgFileName){
         //output the final svg
-        var svg = $(".svg-container > svg");
-
+        var svgContainer = $(".svg-container");
+        var source = svgContainervg.html();
         //get svg source.
-        var serializer = new XMLSerializer();
-        var source = serializer.serializeToString(svg[0]);
+
+        // dont serialize it
+        // var serializer = new XMLSerializer();
+        // var source = serializer.serializeToString(svg[0]);
 
         //add name spaces.
         if(!source.match(/^<svg[^>]+xmlns="http\:\/\/www\.w3\.org\/2000\/svg"/)){
@@ -196,7 +198,7 @@ var init = function(){
 
         //you can download svg file by right click menu.
         $('#downloadlink').get(0).click();
-        console.log(svg[0]);
+        console.log(source);
     };
 //Start the script after the page is loaded
 $(document).ready(function() {

@@ -27,6 +27,8 @@ html{ text-rendering: optimizeLegibility;}
   &.re-upload{
     margin: 0;
     padding: unset;    
+    z-index: 2;
+    position: relative;
     &:hover{
       color: #fff;
       background-color: rgb(235, 69, 69);
@@ -154,6 +156,9 @@ text{
     fill:#2ff2f2;
 }
 
+.pre-mapped{
+  fill:#70ff7c;
+}
 #svg-uploader{
   display:none;
 }
@@ -187,5 +192,12 @@ text{
     box-shadow: 0 0.5px 0 1px rgba(5, 5, 5, 0.1);
     font-size: 20px;
     display:none;
+  }  
+}
+
+.svg-mapping-category{
+  &.droping-zone{
+    fill: red;
+    transition: 0.3s;
   }  
 }

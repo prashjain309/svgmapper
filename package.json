@@ -15,14 +15,14 @@
     "gulp-util": "^3.0.8",
     "lodash": "^4.17.4",
     "merge-stream": "^1.0.1",
-    "rimraf":"^2.6.2",
+    "rimraf": "^2.6.2",
     "run-sequence": "^2.2.0",
     "uglifyify": "^4.0.5",
     "vinyl-buffer": "^1.0.0",
     "vinyl-source-stream": "^1.1.0",
     "watchify": "^3.9.0"
   },
-    "gh-pages-deploy": {
+  "gh-pages-deploy": {
     "staticpath": "build",
     "prep": [
       "clean-old",
@@ -40,6 +40,6 @@
     "test": "gulp build --production",
     "deploy": "gh-pages-deploy",
     "clean-source": "rimraf README.md src",
-    "clean-old":"rimraf styles svgs scripts build index.html"
+    "clean-old": "rimraf styles svgs scripts build index.html"
   }
 }

@@ -1,25 +1,25 @@
 {
   "devDependencies": {
     "@alrra/travis-scripts": "^3.0.1",
-    "browser-sync": "^2.18.13",
-    "browserify": "^14.5.0",
-    "es6-promise": "^4.1.1",
-    "gh-pages-deploy": "0.4.2",
+    "browser-sync": "^2.24.7",
+    "browserify": "^16.2.2",
+    "es6-promise": "^4.2.4",
+    "gh-pages-deploy": "0.5.0",
     "gulp": "^3.9.1",
-    "gulp-clean": "^0.3.2",
-    "gulp-htmlmin": "^3.0.0",
-    "gulp-less": "^3.3.2",
+    "gulp-clean": "^0.4.0",
+    "gulp-htmlmin": "^5.0.1",
+    "gulp-less": "^4.0.1",
     "gulp-load-plugins": "^1.5.0",
-    "gulp-size": "^2.1.0",
-    "gulp-sourcemaps": "^2.6.1",
+    "gulp-size": "^3.0.0",
+    "gulp-sourcemaps": "^2.6.4",
     "gulp-util": "^3.0.8",
-    "lodash": "^4.17.4",
+    "lodash": "^4.17.10",
     "merge-stream": "^1.0.1",
     "rimraf": "^2.6.2",
-    "run-sequence": "^2.2.0",
-    "uglifyify": "^4.0.5",
+    "run-sequence": "^2.2.1",
+    "uglifyify": "^5.0.1",
     "vinyl-buffer": "^1.0.0",
-    "vinyl-source-stream": "^1.1.0",
+    "vinyl-source-stream": "^2.0.0",
     "watchify": "^3.9.0"
   },
   "gh-pages-deploy": {
@@ -39,7 +39,7 @@
     "serve": "gulp serve",
     "test": "gulp build --production",
     "deploy": "gh-pages-deploy",
-    "clean-source": "rimraf README.md src",
+    "clean-source": "rimraf README.md src gulpfile.js",
     "clean-old": "rimraf styles svgs scripts build index.html"
   }
 }

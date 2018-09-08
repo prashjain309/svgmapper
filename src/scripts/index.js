@@ -1,11 +1,13 @@
 var dom = {};
 
 var session = {
-  categoriesDom: {}
+  categoriesDom: {},
+  svgFileName: '',
+  svgFileContent: ''
 };
 var initDom = function() {
-  (dom.prefixWrapper = $(".prefix")),
-    (dom.prefixInput = $("input[name='prefix']", dom.prefixWrapper));
+  dom.prefixWrapper = $(".prefix")
+  dom.prefixInput = $("input[name='prefix']", dom.prefixWrapper);
 
   // TODO: To be used
   dom.svgUploaderContainer = $("#svg-uploader");
@@ -13,14 +15,13 @@ var initDom = function() {
 };
 var init = function() {
   //logic for svg file upload and display it as a svg only
-  var svgFileContent, svgFileName;
   reuploadState = false;
   //logic for svg file upload and display it as a svg only
   $("#svg-uploader").change(function() {
     var input = this;
     var fileName = input.files[0].name;
     if (input.files && input.files[0].type == "image/svg+xml") {
-      svgFileName = fileName;
+      session.svgFileName = fileName;
       var reader = new FileReader();
       reader.onload = function(e) {
         $(".btn")
@@ -30,20 +31,20 @@ var init = function() {
               fileName +
               "<b>\nClick Here to Re-Upload the SVG</pre>"
           );
-        svgFileContent = e.target.result;
-        svgFileContent.id = "target-svg";
+        session.svgFileContent = e.target.result;
+        session.svgFileContent.id = "target-svg";
         //remove Old SVG if uploaded
         $(".svg-container > svg").remove();
 
         //Attach the new Svg to the Dom
-        $(".svg-container").append(svgFileContent);
+        dom.svgContainer.append(session.svgFileContent);
 
         initSVGDom();
 
         if (!reuploadState) {
           //Initialize Drag Drop and download functionality for the first time
           dragDropInit();
-          downloadInit(svgFileName);
+          downloadInit();
         }
 
         //Initialize hover every time the new svg is uploaded
@@ -246,26 +247,27 @@ var zoomInit = function(zoomTarget) {
     });
 };
 //Attach Download Button to DOM
-var downloadInit = function(svgFileName) {
+var downloadInit = function() {
   $("#download")
     .show()
     .click(function() {
       var svg;
       svg = $(".svg-container > svg");
       convertSVG(svg);
-      saveSVG(svgFileName);
+      saveSVG();
     });
 };
 
 convertSVG = function(svg) {
   // Remove all classes which are not requried
-  $("*", svg).removeClass("enabled heyo mapped pre-mapped svg-mapping-category");
+  $("*", svg).removeClass(
+    "enabled heyo mapped pre-mapped svg-mapping-category"
+  );
 };
 
-saveSVG = function(svgFileName) {
+saveSVG = function() {
   //output the final svg
-  var svgContainer = $(".svg-container");
-  var source = svgContainer.html();
+  var source = dom.svgContainer.html();
   //get svg source.
 
   // dont serialize it
@@ -291,7 +293,7 @@ saveSVG = function(svgFileName) {
 
   //set url value to a element's href attribute and make it downloadable.
   document.getElementById("downloadlink").href = url;
-  document.getElementById("downloadlink").download = svgFileName;
+  document.getElementById("downloadlink").download = session.svgFileName;
 
   //you can download svg file by right click menu.
   $("#downloadlink")

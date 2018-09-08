@@ -2,11 +2,12 @@ var dom = {};
 
 var session = {
   categoriesDom: {},
-  svgFileName: '',
-  svgFileContent: ''
+  svgFileName: "",
+  svgFileContent: "",
+  activeSvg: ""
 };
 var initDom = function() {
-  dom.prefixWrapper = $(".prefix")
+  dom.prefixWrapper = $(".prefix");
   dom.prefixInput = $("input[name='prefix']", dom.prefixWrapper);
 
   // TODO: To be used
@@ -243,14 +244,34 @@ var zoomInit = function(zoomTarget) {
     .panzoom({
       $zoomIn: $("#ZoomInSVG").show(),
       $zoomOut: $("#ZoomOutSVG").show(),
-      $reset: $("#ZoomResetSVG").show()
+      $reset: $("#ZoomResetSVG").show(),
+      panOnlyWhenZoomed: true,
+      transition: true,
+      linearZoom: true,
+      minScale: 1,
+      maxScale: 5
+    });
+
+  zoomTarget
+    .parent()
+    .parent()
+    .on("mousewheel.focal", function(e) {
+      e.preventDefault();
+      var delta = e.delta || e.originalEvent.wheelDelta;
+      var zoomOut = delta ? delta < 0 : e.originalEvent.deltaY > 0;
+      zoomTarget.parent().panzoom("zoom", zoomOut, {
+        increment: 0.1,
+        animate: true,
+        focal: e/100.0
+      });
     });
 };
 //Attach Download Button to DOM
 var downloadInit = function() {
   $("#download")
     .show()
-    .click(function() {
+    .off()
+    .on("click", function() {
       var svg;
       svg = $(".svg-container > svg");
       convertSVG(svg);

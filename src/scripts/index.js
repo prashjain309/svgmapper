@@ -30,7 +30,7 @@ var init = function() {
           .html(
             "<pre>You are Mapping <b>" +
               fileName +
-              "<b>\nClick Here to Re-Upload the SVG</pre>"
+              "</b>\nClick Here to Re-Upload the SVG</pre>"
           );
         session.svgFileContent = e.target.result;
         session.svgFileContent.id = "target-svg";
@@ -61,15 +61,37 @@ var init = function() {
 
   //Logic for excel file upload and conversion
   $("#convert").click(function() {
-    x = $("#inney").val();
-    x = x.split("(").join('</td><td draggable="true">' + dom.prefixInput.val());
-    x = x.split(")").join("</td>\n\t</tr>\n\t<tr>\n\t\t<td>");
-    x = "<table>\n\t<tr>\n\t\t<td>" + x + "</td>\n\t</tr>\n</table>\n";
-    $("#output")
-      .text(x)
-      .focus()
-      .select();
-    $("#render").html(x);
+    var text = $("#inney").val();
+    var prefixer = dom.prefixInput.val() || "";
+
+    var tableRows = text.split(")").map(function(e) {
+      if (!e) return "";
+      var descVal = e.split("(") || [];
+      var desc = descVal[0];
+      var category = descVal[1];
+
+      if (!category) return "";
+
+      var categoryDom =
+        '<td class="draggable-category" draggable="true" >' +
+        prefixer +
+        category +
+        "</td>";
+
+      var descDom = '<td class="category-description" >' + desc + "</td>";
+
+      var row = "<tr>" + categoryDom + descDom + "</tr>";
+      return row;
+    });
+
+    var tableRowsString = tableRows.reduce(function(acc, cur) {
+      return acc + cur;
+    });
+
+    var droppableCategoriesTable =
+      "<table><tbody>" + tableRowsString + "</tbody></table>\n";
+
+    $("#render").html(droppableCategoriesTable);
   });
 };
 
@@ -245,6 +267,7 @@ var zoomInit = function(zoomTarget) {
       $zoomIn: $("#ZoomInSVG").show(),
       $zoomOut: $("#ZoomOutSVG").show(),
       $reset: $("#ZoomResetSVG").show(),
+      contain: "invert",
       panOnlyWhenZoomed: true,
       transition: true,
       linearZoom: true,
@@ -262,7 +285,7 @@ var zoomInit = function(zoomTarget) {
       zoomTarget.parent().panzoom("zoom", zoomOut, {
         increment: 0.1,
         animate: true,
-        focal: e/100.0
+        focal: e / 100.0
       });
     });
 };

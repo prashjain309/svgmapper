@@ -28,7 +28,8 @@ html{ text-rendering: optimizeLegibility;}
     margin: 0;
     padding: unset;    
     z-index: 2;
-    position: relative;
+    position: absolute;
+    width: 100%;
     &:hover{
       color: #fff;
       background-color: rgb(235, 69, 69);
@@ -69,21 +70,28 @@ textarea {
 }
 
 table {
-  width:100%;
+  width: 100%;
   line-height: 1.1;
-  border: 1px solid #888;
-  margin:1em auto 2em;
 
   tr {
     border-top: 1px solid #888;
   }
   td, th {
+    border: 1px solid #888;
     font-weight: normal;
     padding: .5em 1em;
-    text-align: right;
-    &:first-child {
-      text-align: left;
-    }
+  }
+  .draggable-category{
+    background: #7de6ff8a;
+    border-radius: 12px;
+    border: 2px #35b3b3;
+    border-style: solid;
+    text-align: center;
+  }
+
+  .category-description{
+    font-family: monospace;
+    border: unset;
   }
 }
 
@@ -92,10 +100,12 @@ table {
   padding: .5em 1em;
   border-radius: .4em;
 }
+
 .fileUpload {
     position: relative;
     overflow: hidden;
 }
+
 .fileUpload input.upload {
     position: absolute;
     top: 0;

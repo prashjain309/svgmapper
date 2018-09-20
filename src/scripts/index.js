@@ -120,7 +120,7 @@ var dragDropInit = function() {
       event.preventDefault();
       event.stopPropagation();
       // reset the transparency
-      event.target.style.opacity = "";
+      // event.target.style.opacity = "";
     },
     false
   );

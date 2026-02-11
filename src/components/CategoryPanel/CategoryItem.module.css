@@ -1,0 +1,17 @@
+.code {
+  background: var(--color-category-bg);
+  border-radius: var(--radius-lg);
+  border: 2px solid var(--color-category-border);
+  text-align: center;
+  cursor: grab;
+  user-select: none;
+}
+
+.name {
+  font-family: monospace;
+  border: none;
+}
+
+.dragging {
+  opacity: 0.5;
+}

@@ -1,0 +1,52 @@
+.svgContainer {
+  width: 100%;
+  overflow: hidden;
+}
+
+.svgContainer :global(svg) {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.svgContainer :global(.svg-mapping-category) {
+  cursor: pointer;
+}
+
+.svgContainer :global(.svg-mapping-category.droping-zone) {
+  fill: var(--color-drop-zone);
+  transition: fill 0.3s;
+}
+
+.svgContainer :global(.mapped) {
+  fill: var(--color-mapped);
+}
+
+.svgContainer :global(.pre-mapped) {
+  fill: var(--color-pre-mapped);
+}
+
+.svgContainer :global(.enabled.heyo) {
+  fill: var(--color-hover);
+  transition: fill 0.3s;
+}
+
+.dropZone {
+  outline: 2px dashed var(--color-drop-zone);
+}
+
+.tooltip {
+  pointer-events: none;
+  position: fixed;
+  font-size: 14px;
+  text-align: center;
+  background: white;
+  padding: 6px 12px;
+  z-index: 100;
+  line-height: 1.4;
+  color: var(--color-primary);
+  border-radius: var(--radius-sm);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  transform: translateX(-50%);
+  white-space: nowrap;
+}

@@ -1,0 +1,21 @@
+.list {
+  max-height: 350px;
+  overflow-y: auto;
+}
+
+.table {
+  width: 100%;
+  line-height: 1.1;
+  border-collapse: collapse;
+}
+
+.table tr {
+  border-top: 1px solid var(--color-border);
+}
+
+.table td,
+.table th {
+  border: 1px solid var(--color-border);
+  font-weight: normal;
+  padding: 0.5em 1em;
+}

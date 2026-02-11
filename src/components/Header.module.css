@@ -1,0 +1,12 @@
+.heading {
+  border: 1px solid gray;
+  text-align: center;
+  padding: 8px;
+  background-color: var(--color-heading-bg);
+  margin-bottom: 16px;
+}
+
+.title {
+  margin: 0;
+  font-size: 1.5rem;
+}

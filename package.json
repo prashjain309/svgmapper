@@ -1,45 +1,37 @@
 {
-  "devDependencies": {
-    "@alrra/travis-scripts": "^3.0.1",
-    "browser-sync": "^2.24.7",
-    "browserify": "^16.2.2",
-    "es6-promise": "^4.2.4",
-    "gh-pages-deploy": "^0.4.2",
-    "gulp": "^3.9.1",
-    "gulp-clean": "^0.4.0",
-    "gulp-htmlmin": "^5.0.1",
-    "gulp-less": "^4.0.1",
-    "gulp-load-plugins": "^1.5.0",
-    "gulp-size": "^3.0.0",
-    "gulp-sourcemaps": "^2.6.4",
-    "gulp-util": "^3.0.8",
-    "lodash": "^4.17.10",
-    "merge-stream": "^1.0.1",
-    "rimraf": "^2.6.2",
-    "run-sequence": "^2.2.1",
-    "uglifyify": "^5.0.1",
-    "vinyl-buffer": "^1.0.0",
-    "vinyl-source-stream": "^2.0.0",
-    "watchify": "^3.9.0"
-  },
-  "gh-pages-deploy": {
-    "staticpath": "build",
-    "prep": [
-      "clean-old",
-      "build"
-    ],
-    "post": [
-      "clean-source"
-    ],
-    "noprompt": false
-  },
+  "name": "svgmapper",
   "private": true,
+  "version": "2.0.0",
+  "type": "module",
   "scripts": {
-    "build": "gulp build --production",
-    "serve": "gulp serve",
-    "test": "gulp build --production",
-    "deploy": "gh-pages-deploy",
-    "clean-source": "rimraf README.md src gulpfile.js",
-    "clean-old": "rimraf styles svgs scripts build index.html"
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "lint": "eslint src/",
+    "lint:fix": "eslint src/ --fix",
+    "format": "prettier --write \"src/**/*.{js,jsx,css,json}\"",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage"
+  },
+  "dependencies": {
+    "@dnd-kit/core": "^6.1.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-zoom-pan-pinch": "^3.6.1"
+  },
+  "devDependencies": {
+    "@testing-library/jest-dom": "^6.6.3",
+    "@testing-library/react": "^16.1.0",
+    "@testing-library/user-event": "^14.5.2",
+    "@vitejs/plugin-react": "^4.3.4",
+    "eslint": "^9.16.0",
+    "eslint-plugin-react": "^7.37.2",
+    "eslint-plugin-react-hooks": "^5.1.0",
+    "globals": "^15.13.0",
+    "jsdom": "^25.0.1",
+    "prettier": "^3.4.2",
+    "vite": "^6.0.3",
+    "vitest": "^2.1.8"
   }
 }

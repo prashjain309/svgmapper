@@ -1,0 +1,19 @@
+.wrapper {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding-bottom: 12px;
+}
+
+.label {
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.input {
+  flex: 1;
+  padding: 6px 10px;
+  border: 1px solid #ccc;
+  border-radius: var(--radius-sm);
+  font-size: 0.9rem;
+}

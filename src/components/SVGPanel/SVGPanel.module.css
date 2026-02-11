@@ -1,0 +1,21 @@
+.panel {
+  width: 49%;
+  border: 1px solid gray;
+  position: relative;
+  min-height: 200px;
+}
+
+.displayWrapper {
+  position: relative;
+  overflow: hidden;
+}
+
+.zoomWrapper {
+  width: 100%;
+}
+
+@media (max-width: 768px) {
+  .panel {
+    width: 100%;
+  }
+}

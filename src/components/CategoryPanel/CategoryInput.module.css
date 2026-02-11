@@ -1,0 +1,41 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.textarea {
+  font-family: monospace;
+  display: block;
+  width: 100%;
+  min-height: 100px;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: var(--radius-sm);
+  font-size: 0.9rem;
+  resize: vertical;
+}
+
+.convertBtn {
+  width: 100%;
+  padding: 8px 16px;
+  border-radius: var(--radius-sm);
+  border: 1px solid #ccc;
+  background-color: #fff;
+  cursor: pointer;
+  font-size: 0.95rem;
+  transition: background-color 0.2s;
+}
+
+.convertBtn:hover {
+  background-color: #f0f0f0;
+}
+
+.error {
+  color: #d32f2f;
+  background: #ffeaea;
+  padding: 8px 12px;
+  border-radius: var(--radius-sm);
+  font-size: 0.85rem;
+  margin: 0;
+}
